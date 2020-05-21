@@ -7,9 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 @Entity
 @Table(name = "TBL_PRODUCT")
-
+@DynamicUpdate(true)
 public class ProductEntity {
 
 	@Id

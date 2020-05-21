@@ -1,5 +1,7 @@
 package com.billing.billingmart.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,39 +16,61 @@ public class ProductBookingEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long billing_id;
 
 	@Column(name = "customer_id")
-	private long customerID;
+	private Long customerID;
 
-	@Column(name = "product_id")
-	private long productID;
+	@Column(name = "product_details")
+	private String productDetails;
 
-	@Column(name = "price")
+	@Column(name = "billing_comments")
+	private String billingComments;
+
+	@Column(name = "billing_date")
+	private Date billingDate;
+
+	@Column(name = "total_price")
 	private String totalPrice;
 
-	public Long getId() {
-		return id;
+	public Long getBilling_id() {
+		return billing_id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setBilling_id(Long billing_id) {
+		this.billing_id = billing_id;
 	}
 
-	public long getCustomerID() {
+	public Long getCustomerID() {
 		return customerID;
 	}
 
-	public void setCustomerID(long customerID) {
+	public void setCustomerID(Long customerID) {
 		this.customerID = customerID;
 	}
 
-	public long getProductID() {
-		return productID;
+	public String getProducDetails() {
+		return productDetails;
 	}
 
-	public void setProductID(long productID) {
-		this.productID = productID;
+	public void setProducDetails(String productDetails) {
+		this.productDetails = productDetails;
+	}
+
+	public String getBillingComments() {
+		return billingComments;
+	}
+
+	public void setBillingComments(String billingComments) {
+		this.billingComments = billingComments;
+	}
+
+	public Date getBillingDate() {
+		return billingDate;
+	}
+
+	public void setBillingDate(Date billingDate) {
+		this.billingDate = billingDate;
 	}
 
 	public String getTotalPrice() {
@@ -59,7 +83,8 @@ public class ProductBookingEntity {
 
 	@Override
 	public String toString() {
-		return "ProductBookingEntity [id=" + id + ", customerID=" + customerID + ", productID=" + productID
+		return "ProductBookingEntity [billing_id=" + billing_id + ", customerID=" + customerID + ", productDetails="
+				+ productDetails + ", billingComments=" + billingComments + ", billingDate=" + billingDate
 				+ ", totalPrice=" + totalPrice + "]";
 	}
 }
