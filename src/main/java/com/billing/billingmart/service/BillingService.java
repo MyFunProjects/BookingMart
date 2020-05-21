@@ -120,7 +120,6 @@ public class BillingService {
 				Optional<ProductEntity> aProductEntity = productRepository
 						.findById(Long.valueOf(aProductDetails.getProductId()));
 				if (aProductEntity.isPresent()) {
-					// p.setQuantity(newQuantity.toString());
 					productRepository.setQuantity(newQuantity.toString(), aProductEntity.get().getProduct_id());
 
 				}
@@ -132,5 +131,13 @@ public class BillingService {
 		// substring
 		pProductBookingEntity.setBillingComments(stringbuilder.toString());
 		return totalPrice.toString();
+	}
+
+	public void deleteBillById(Long pBillingid) {
+		Optional<ProductBookingEntity> aBilling = billingRepository.findById(pBillingid);
+		if (aBilling.isPresent()) {
+			billingRepository.deleteById(pBillingid);
+		}
+
 	}
 }

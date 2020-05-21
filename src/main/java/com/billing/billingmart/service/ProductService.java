@@ -48,4 +48,12 @@ public class ProductService {
 		productRepository.save(theNewProduct);
 		return theNewProduct;
 	}
+
+	public void deleteEmployeeById(Long pProductId) {
+		Optional<ProductEntity> aProduct = productRepository.findById(pProductId);
+
+		if (aProduct.isPresent()) {
+			productRepository.deleteById(pProductId);
+		}
+	}
 }

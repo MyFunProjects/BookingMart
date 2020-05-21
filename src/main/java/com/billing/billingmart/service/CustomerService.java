@@ -46,4 +46,11 @@ public class CustomerService {
 		customerRepository.save(theNewCustomer);
 		return theNewCustomer;
 	}
+
+	public void deleteCustomerById(Long pCustomerid) {
+		Optional<CustomerEntity> aProduct = customerRepository.findById(pCustomerid);
+		if (aProduct.isPresent()) {
+			customerRepository.deleteById(pCustomerid);
+		}
+	}
 }
