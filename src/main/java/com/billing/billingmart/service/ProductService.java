@@ -27,6 +27,7 @@ public class ProductService {
 	}
 
 	public ProductEntity getAllProductsByID(Long pProductId) {
+		
 		Optional<ProductEntity> theProductIDList = productRepository.findById(pProductId);
 		ProductEntity aProduct = new ProductEntity();
 		if (theProductIDList.isPresent()) {
@@ -39,17 +40,28 @@ public class ProductService {
 		}
 		return aProduct;
 	}
-
-	public ProductEntity createNewProduct(ProductEntity pNewProduct) {
-		ProductEntity theNewProduct = new ProductEntity();
-		theNewProduct.setProductName(pNewProduct.getProductName());
-		theNewProduct.setPrice(pNewProduct.getPrice());
-		theNewProduct.setQuantity(pNewProduct.getQuantity());
-		productRepository.save(theNewProduct);
-		return theNewProduct;
+	
+	public ProductEntity CreateOrUpdateProduct(ProductEntity pNewProduct) {
+		if (pNewProduct.getProduct_id() == null) {
+			pNewProduct = productRepository.save(pNewProduct);
+			return pNewProduct;
+		} else {
+			Optional<ProductEntity> aProductID = productRepository.findById(pNewProduct.getProduct_id());
+			if (aProductID.isPresent()) {
+				ProductEntity theNewProduct = aProductID.get();
+				theNewProduct.setProductName(pNewProduct.getProductName());
+				theNewProduct.setPrice(pNewProduct.getPrice());
+				theNewProduct.setQuantity(pNewProduct.getQuantity());
+				productRepository.save(theNewProduct);
+				return theNewProduct;
+			} else {
+				pNewProduct = productRepository.save(pNewProduct);
+				return pNewProduct;
+			}
+		}
 	}
-
-	public void deleteEmployeeById(Long pProductId) {
+	
+	public void deleteProductById(Long pProductId) {
 		Optional<ProductEntity> aProduct = productRepository.findById(pProductId);
 
 		if (aProduct.isPresent()) {

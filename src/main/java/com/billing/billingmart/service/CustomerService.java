@@ -27,30 +27,52 @@ public class CustomerService {
 	}
 
 	public CustomerEntity getAllCustomersByID(Long pCustomerId) {
-		Optional<CustomerEntity> theCustomerIDList = customerRepository.findById(pCustomerId);
+		Optional<CustomerEntity> aCustomerID = customerRepository.findById(pCustomerId);
 		CustomerEntity aCustomer = new CustomerEntity();
-		if (theCustomerIDList.isPresent()) {
-			aCustomer.setCustomer_id(theCustomerIDList.get().getCustomer_id());
-			aCustomer.setCustomerName(theCustomerIDList.get().getCustomerName());
-			aCustomer.setPhNumber(theCustomerIDList.get().getPhNumber());
+		if (aCustomerID.isPresent()) {
+			aCustomer.setCustomer_id(aCustomerID.get().getCustomer_id());
+			aCustomer.setCustomerName(aCustomerID.get().getCustomerName());
+			aCustomer.setPhNumber(aCustomerID.get().getPhNumber());
 		} else {
 			return null;
 		}
 		return aCustomer;
 	}
 
-	public CustomerEntity createNewCustomer(CustomerEntity pNewCustomer) {
-		CustomerEntity theNewCustomer = new CustomerEntity();
-		theNewCustomer.setCustomerName(pNewCustomer.getCustomerName());
-		theNewCustomer.setPhNumber(pNewCustomer.getPhNumber());
-		customerRepository.save(theNewCustomer);
-		return theNewCustomer;
-	}
+	public CustomerEntity createOrUpdateCustomer(CustomerEntity pNewCustomer) {
+		if (pNewCustomer.getCustomer_id() == null) {
+			pNewCustomer = customerRepository.save(pNewCustomer);
+			return pNewCustomer;
+		} else {
+
+			Optional<CustomerEntity> aCustomerID = customerRepository.findById(pNewCustomer.getCustomer_id());
+			if (aCustomerID.isPresent()) {
+				CustomerEntity theNewCustomer = aCustomerID.get();
+				theNewCustomer.setCustomerName(pNewCustomer.getCustomerName());
+				theNewCustomer.setPhNumber(pNewCustomer.getPhNumber());
+				theNewCustomer = customerRepository.save(theNewCustomer);
+				return theNewCustomer;
+			}
+
+			else {
+				pNewCustomer = customerRepository.save(pNewCustomer);
+				return pNewCustomer;
+			}
+		}
+	}		
 
 	public void deleteCustomerById(Long pCustomerid) {
 		Optional<CustomerEntity> aProduct = customerRepository.findById(pCustomerid);
 		if (aProduct.isPresent()) {
 			customerRepository.deleteById(pCustomerid);
 		}
+	}
+
+	public void updateCustomerById(Long pCustomerId, CustomerEntity pNewCustomer) {
+		Optional<CustomerEntity> aUpdateCustomerID = customerRepository.findById(pCustomerId);
+		if(aUpdateCustomerID.isPresent()) {
+			
+		}
+		
 	}
 }

@@ -42,9 +42,9 @@ public class CustomerController {
 		}
 	}
 
-	@PostMapping("/NewCustomer")
-	public ResponseEntity<String> createNewCustomer(@RequestBody CustomerEntity pNewCustomer) {
-		CustomerEntity aNewCustomer = customerService.createNewCustomer(pNewCustomer);
+	@PostMapping("/CreateOrUpdateCustomer")
+	public ResponseEntity<String> createOrUpdateCustomer(@RequestBody CustomerEntity pNewCustomer) {
+		CustomerEntity aNewCustomer = customerService.createOrUpdateCustomer(pNewCustomer);
 		return new ResponseEntity<String>("Customer id :" +Long.toString(aNewCustomer.getCustomer_id()), HttpStatus.OK);
 	}
 	

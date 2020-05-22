@@ -87,7 +87,7 @@ public class BillingService {
 		String jsonString = JsonUtility.convertToDatabaseColumn(theProductDetailsList);
 		System.out.println("the string value is " + jsonString);
 		aProductBookingEntity.setProducDetails(jsonString);
-		aProductBookingEntity.setBillingDate(date);
+		aProductBookingEntity.setBillingDate(date);		
 		aProductBookingEntity.setTotalPrice(calculatePrice(theProductDetailsList, aProductBookingEntity));
 		billingRepository.save(aProductBookingEntity);
 		return aProductBookingEntity;
@@ -106,7 +106,8 @@ public class BillingService {
 			ProductBookingEntity pProductBookingEntity) {
 		Integer totalPrice = 0;
 		StringBuilder stringbuilder = new StringBuilder();
-		stringbuilder.append("Happy shopping...!");
+		boolean isDescrepencyExist =false;
+		//stringbuilder.append("Happy shopping...!");
 		pProductBookingEntity.setBillingComments(stringbuilder.toString());
 		for (ProductDetails aProductDetails : theProductDetailsList) {
 			Integer newQuantity = 0;
@@ -121,15 +122,23 @@ public class BillingService {
 						.findById(Long.valueOf(aProductDetails.getProductId()));
 				if (aProductEntity.isPresent()) {
 					productRepository.setQuantity(newQuantity.toString(), aProductEntity.get().getProduct_id());
-
+					
+					
 				}
 			} else {
+				isDescrepencyExist=true;
 				stringbuilder.append("Product Descrepency Exist for productId: " + aProductDetails.getProductId())
 						.append(",");
 			}
 		}
-		// substring
-		pProductBookingEntity.setBillingComments(stringbuilder.toString());
+	if(isDescrepencyExist) {
+		String val = stringbuilder.toString().trim();		
+		pProductBookingEntity.setBillingComments(val.substring(0,val.length()-1));
+		
+		}
+	else {
+		pProductBookingEntity.setBillingComments("Happy Shopping...!");
+	}
 		return totalPrice.toString();
 	}
 

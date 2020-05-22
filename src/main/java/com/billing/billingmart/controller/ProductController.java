@@ -41,16 +41,16 @@ public class ProductController {
 		}
 	}
 
-	@PostMapping("/NewProduct")
-	public ResponseEntity<String> createNewCustomer(@RequestBody ProductEntity pNewProduct) {
-		ProductEntity aNewCustomer = productService.createNewProduct(pNewProduct);
+	@PostMapping("/CreateOrUpdateProduct")
+	public ResponseEntity<String> createOrUpdateProduct(@RequestBody ProductEntity pNewProduct) {
+		ProductEntity aNewCustomer = productService.CreateOrUpdateProduct(pNewProduct);
 		return new ResponseEntity<String>("Product id :" +Long.toString(aNewCustomer.getProduct_id()), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/DeleteProduct/{product_id}")
     public String deleteProductById(@PathVariable("product_id") Long pProductId)
                                                    {
-		productService.deleteEmployeeById(pProductId);
+		productService.deleteProductById(pProductId);
         return "Deleted Product Successfully";
     }
  
