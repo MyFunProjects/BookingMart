@@ -1,6 +1,5 @@
 package com.billing.billingmart.model;
 
-import java.util.Date;
 import java.util.List;
 
 public class BillingResponse {
