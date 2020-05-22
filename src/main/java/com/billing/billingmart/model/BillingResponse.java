@@ -9,7 +9,7 @@ public class BillingResponse {
 	public List<ProductDetails> productDetails;
 	public List<CustomerEntity> customerDetails;
 	private String billingComments;
-	private Date billingDate;
+	private String billingDate;
 	private String totalPrice;
 
 	public Long getBilling_id() {
@@ -44,11 +44,11 @@ public class BillingResponse {
 		this.billingComments = billingComments;
 	}
 
-	public Date getBillingDate() {
+	public String getBillingDate() {
 		return billingDate;
 	}
 
-	public void setBillingDate(Date billingDate) {
+	public void setBillingDate(String billingDate) {
 		this.billingDate = billingDate;
 	}
 

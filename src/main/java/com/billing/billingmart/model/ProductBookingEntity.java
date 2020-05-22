@@ -28,7 +28,7 @@ public class ProductBookingEntity {
 	private String billingComments;
 
 	@Column(name = "billing_date")
-	private Date billingDate;
+	private String billingDate;
 
 	@Column(name = "total_price")
 	private String totalPrice;
@@ -65,11 +65,12 @@ public class ProductBookingEntity {
 		this.billingComments = billingComments;
 	}
 
-	public Date getBillingDate() {
+
+	public String getBillingDate() {
 		return billingDate;
 	}
 
-	public void setBillingDate(Date billingDate) {
+	public void setBillingDate(String billingDate) {
 		this.billingDate = billingDate;
 	}
 

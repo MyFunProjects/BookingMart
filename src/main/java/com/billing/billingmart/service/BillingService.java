@@ -1,5 +1,7 @@
 package com.billing.billingmart.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -68,6 +70,8 @@ public class BillingService {
 	@Transactional
 	public ProductBookingEntity createNewBilling(NewBillingRequest pNewBilling) {
 		Date date = new Date();
+		DateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
+		String formattedDate = dateFormatter.format(date); 
 		CustomerEntity aCustomerEntity = new CustomerEntity();
 		List<ProductDetails> theProductDetailsList = new ArrayList<ProductDetails>();
 		ProductBookingEntity aProductBookingEntity = new ProductBookingEntity();
@@ -87,7 +91,7 @@ public class BillingService {
 		String jsonString = JsonUtility.convertToDatabaseColumn(theProductDetailsList);
 		System.out.println("the string value is " + jsonString);
 		aProductBookingEntity.setProducDetails(jsonString);
-		aProductBookingEntity.setBillingDate(date);		
+		aProductBookingEntity.setBillingDate(formattedDate);		
 		aProductBookingEntity.setTotalPrice(calculatePrice(theProductDetailsList, aProductBookingEntity));
 		billingRepository.save(aProductBookingEntity);
 		return aProductBookingEntity;
@@ -106,8 +110,7 @@ public class BillingService {
 			ProductBookingEntity pProductBookingEntity) {
 		Integer totalPrice = 0;
 		StringBuilder stringbuilder = new StringBuilder();
-		boolean isDescrepencyExist =false;
-		//stringbuilder.append("Happy shopping...!");
+		boolean isDiscrepencyExist =false;
 		pProductBookingEntity.setBillingComments(stringbuilder.toString());
 		for (ProductDetails aProductDetails : theProductDetailsList) {
 			Integer newQuantity = 0;
@@ -126,12 +129,12 @@ public class BillingService {
 					
 				}
 			} else {
-				isDescrepencyExist=true;
-				stringbuilder.append("Product Descrepency Exist for productId: " + aProductDetails.getProductId())
+				isDiscrepencyExist=true;
+				stringbuilder.append("Product discrepancy Exist for productId: " + aProductDetails.getProductId())
 						.append(",");
 			}
 		}
-	if(isDescrepencyExist) {
+	if(isDiscrepencyExist) {
 		String val = stringbuilder.toString().trim();		
 		pProductBookingEntity.setBillingComments(val.substring(0,val.length()-1));
 		

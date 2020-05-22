@@ -22,6 +22,6 @@ CREATE TABLE TBL_PRODUCT_BOOKING (
   customer_id INTEGER NOT NULL,
   product_details VARCHAR(300) NOT NULL,
   billing_comments VARCHAR(300) NOT NULL,
-  billing_date DATE,
+  billing_date VARCHAR(300),
   total_price NUMBER NOT NULL  
 );
