@@ -12,6 +12,20 @@ import javax.persistence.Table;
 
 public class ProductBookingEntity {
 
+	public ProductBookingEntity() {
+	}
+
+	public ProductBookingEntity(Long billing_id, Long customerID, String productDetails, String billingComments,
+			String billingDate, String totalPrice) {
+		super();
+		this.billing_id = billing_id;
+		this.customerID = customerID;
+		this.productDetails = productDetails;
+		this.billingComments = billingComments;
+		this.billingDate = billingDate;
+		this.totalPrice = totalPrice;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long billing_id;
@@ -62,7 +76,6 @@ public class ProductBookingEntity {
 	public void setBillingComments(String billingComments) {
 		this.billingComments = billingComments;
 	}
-
 
 	public String getBillingDate() {
 		return billingDate;

@@ -59,7 +59,9 @@ public class CustomerService {
 				return pNewCustomer;
 			}
 		}
-	}		
+	}	
+	
+	
 
 	public void deleteCustomerById(Long pCustomerid) {
 		Optional<CustomerEntity> aProduct = customerRepository.findById(pCustomerid);
@@ -67,12 +69,5 @@ public class CustomerService {
 			customerRepository.deleteById(pCustomerid);
 		}
 	}
-
-	public void updateCustomerById(Long pCustomerId, CustomerEntity pNewCustomer) {
-		Optional<CustomerEntity> aUpdateCustomerID = customerRepository.findById(pCustomerId);
-		if(aUpdateCustomerID.isPresent()) {
-			
-		}
-		
-	}
+	
 }

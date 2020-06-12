@@ -14,6 +14,9 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicUpdate(true)
 public class ProductEntity {
 
+	public ProductEntity() {
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long product_id;
@@ -26,6 +29,14 @@ public class ProductEntity {
 
 	@Column(name = "avail_quantity")
 	private String quantity;
+
+	public ProductEntity(Long product_id, String productName, String price, String quantity) {
+		
+		this.product_id = product_id;
+		this.productName = productName;
+		this.price = price;
+		this.quantity = quantity;
+	}
 
 	public Long getProduct_id() {
 		return product_id;
@@ -61,7 +72,7 @@ public class ProductEntity {
 
 	@Override
 	public String toString() {
-		return "ProductEntity [product_id=" + product_id + ", productName=" + productName + ", price=" + price + ", quantity="
-				+ quantity + "]";
+		return "ProductEntity [product_id=" + product_id + ", productName=" + productName + ", price=" + price
+				+ ", quantity=" + quantity + "]";
 	}
 }

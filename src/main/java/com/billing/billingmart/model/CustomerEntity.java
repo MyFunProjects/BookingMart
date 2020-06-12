@@ -7,10 +7,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 @Entity
 @Table(name = "TBL_CUSTOMER")
-
+@DynamicUpdate(true)
 public class CustomerEntity {
+
+	public CustomerEntity() {
+	}
+
+	public CustomerEntity(Long customer_id, String customerName, String phNumber) {
+		super();
+		this.customer_id = customer_id;
+		this.customerName = customerName;
+		this.phNumber = phNumber;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,6 +60,7 @@ public class CustomerEntity {
 
 	@Override
 	public String toString() {
-		return "CustomerEntity [customer_id=" + customer_id + ", customerName=" + customerName + ", phNumber=" + phNumber + "]";
+		return "CustomerEntity [customer_id=" + customer_id + ", customerName=" + customerName + ", phNumber="
+				+ phNumber + "]";
 	}
 }

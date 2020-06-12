@@ -4,12 +4,27 @@ import java.util.List;
 
 public class BillingResponse {
 
+	public BillingResponse() {
+	}
+
 	public Long billing_id;
 	public List<ProductDetails> productDetails;
 	public List<CustomerEntity> customerDetails;
 	private String billingComments;
 	private String billingDate;
 	private String totalPrice;
+	
+
+	public BillingResponse(Long billing_id, List<ProductDetails> productDetails, List<CustomerEntity> customerDetails,
+			String billingComments, String billingDate, String totalPrice) {
+		super();
+		this.billing_id = billing_id;
+		this.productDetails = productDetails;
+		this.customerDetails = customerDetails;
+		this.billingComments = billingComments;
+		this.billingDate = billingDate;
+		this.totalPrice = totalPrice;
+	}
 
 	public Long getBilling_id() {
 		return billing_id;

@@ -5,8 +5,18 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductDetails {
 
+	public ProductDetails() {
+
+	}
+
 	public String productId;
 	public String quantity;
+
+	public ProductDetails(String productId, String quantity) {
+		super();
+		this.productId = productId;
+		this.quantity = quantity;
+	}
 
 	public String getProductId() {
 		return productId;

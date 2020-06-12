@@ -3,10 +3,23 @@ package com.billing.billingmart.model;
 import java.util.List;
 
 public class NewBillingRequest {
+
+	public NewBillingRequest() {
+	}
+
 	public Long customerID;
 	public String customerName;
 	public String phoneNumber;
 	public List<ProductDetails> productDetails;
+
+	public NewBillingRequest(Long customerID, String customerName, String phoneNumber,
+			List<ProductDetails> productDetails) {
+		super();
+		this.customerID = customerID;
+		this.customerName = customerName;
+		this.phoneNumber = phoneNumber;
+		this.productDetails = productDetails;
+	}
 
 	public Long getCustomerID() {
 		return customerID;
@@ -46,5 +59,4 @@ public class NewBillingRequest {
 				+ phoneNumber + ", productDetails=" + productDetails + "]";
 	}
 
-	
 }
